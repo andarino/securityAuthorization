@@ -21,7 +21,7 @@ import com.spring.cryptpass.repository.UsuarioRepository;
 @RequestMapping("/api/usuario")
 public class UsuarioController {
 
-	@Autowired
+	//@Autowired
 	private final UsuarioRepository repository;
 	private final PasswordEncoder encoder;
 	
@@ -39,7 +39,6 @@ public ResponseEntity<List<UsuarioModel>> listarTodos(){
 //RequestBody vai receber um json de entrada e vai converte-lo em objeto
 
 @PostMapping("/salvar")
-@ResponseBody
 public ResponseEntity<UsuarioModel> salvar(@RequestBody UsuarioModel usuario){
 	usuario.setPassword(encoder.encode(usuario.getPassword())); //encriptando a senha antes salva-la
 	return ResponseEntity.ok(repository.save(usuario));
@@ -47,7 +46,8 @@ public ResponseEntity<UsuarioModel> salvar(@RequestBody UsuarioModel usuario){
 
 
 @GetMapping("/validarSenha")
-public ResponseEntity<Boolean> validarSenha(@RequestParam String login, @RequestParam String password)
+public ResponseEntity<Boolean> validarSenha(@RequestParam String login,
+											@RequestParam String password)
 {
 	
 	Optional<UsuarioModel> optUsuario = repository.findByLogin(login);

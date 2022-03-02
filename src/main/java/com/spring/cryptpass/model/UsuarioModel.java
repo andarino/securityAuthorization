@@ -6,6 +6,8 @@ import javax.persistence.*;
 //import javax.persistence.GenerationType;
 //import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,16 +16,16 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name="Usuario")
+@Entity(name="Usuario")
 public class UsuarioModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name="login", unique= true)
+	@Column(unique= true)
 	private String login;
-	@Column(name="password")
+	
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //isso impede da senha ser retornada com listar todos
 	private String password;
 	
 	

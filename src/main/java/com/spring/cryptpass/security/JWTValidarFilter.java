@@ -16,6 +16,8 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 
+
+
 public class JWTValidarFilter extends BasicAuthenticationFilter {
 
 	public static final String HEADER_ATRIBUTO = "Authorization"; //atributo do cabecalho
@@ -28,10 +30,10 @@ public class JWTValidarFilter extends BasicAuthenticationFilter {
 	// step 1: interceptar o cabecalho da requisicao 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, 
-									HttpServletResponse response, FilterChain chain)
-									throws IOException, ServletException {
+									HttpServletResponse response, 
+									FilterChain chain) throws IOException, ServletException {
 		
-		String atributo = request.getHeader(ATRIBUTO_PREFIXO); 
+		String atributo = request.getHeader(HEADER_ATRIBUTO); 
 		
 		if(atributo == null) {
 			chain.doFilter(request, response);

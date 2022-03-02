@@ -6,13 +6,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
-
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import com.spring.cryptpass.services.DetalheUsuarioServiceImpl;
 
 //tivemos que remover essa classe do arquivo principal 
@@ -41,20 +39,20 @@ public class JWTConfiguracao extends WebSecurityConfigurerAdapter{
 				.anyRequest().authenticated()	//qualquer outra solicitacao esteja autenticada 
 				.and()	//para adicionar os filtros de ...
 				.addFilter(new JWTAutenticarFilter(authenticationManager()))	//autenticacao 
-				.addFilter(new JWTAutenticarFilter(authenticationManager()))	//validacao
+				.addFilter(new JWTValidarFilter(authenticationManager()))	//validacao
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);	//para nao guardar a sessao do usuario no servidor 
 		}
 		
-	/*	//permite que app possa receber requisicoes de outros dominios (ex. dispositivos móveis)
-		@Bean
-		CorsConfigurationSource corsConfigurationSource() {
-			final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-			
-		//	CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
-			source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-			return source;
-		}
+		//permite que app possa receber requisicoes de outros dominios (ex. dispositivos móveis)
 		
-	*/	
+	    @Bean
+	    CorsConfigurationSource corsConfigurationSource() {
+	        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+
+	        CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
+	        source.registerCorsConfiguration("/**", corsConfiguration);
+	        return source;
+	    }
+
 		
 }

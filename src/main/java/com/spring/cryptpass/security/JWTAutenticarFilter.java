@@ -24,7 +24,7 @@ import com.spring.cryptpass.model.UsuarioModel;
 public class JWTAutenticarFilter extends UsernamePasswordAuthenticationFilter{
 
 	public static final int TOKEN_EXPIRACAO = 600_000;
-	public static final String TOKEN_SENHA = "29f0605b-2cf8-45fd-8139-968b2df8d943" ; //nao poderia esta aqui 
+	public static final String TOKEN_SENHA = "29f0605b-2cf8-45fd-8139-968b2df8d943"; //nao poderia esta aqui 
 	
 	private final AuthenticationManager authenticationManager;
 
@@ -33,7 +33,8 @@ public class JWTAutenticarFilter extends UsernamePasswordAuthenticationFilter{
 	}
 	
 	 @Override
-public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+public Authentication attemptAuthentication(HttpServletRequest request, 
+											HttpServletResponse response)
 															throws AuthenticationException {
 try {	
 		//receber o json no nosso formato de model
@@ -46,7 +47,7 @@ try {
 				new ArrayList<>()	//lista de permissoes do usuario 
 				));
 } catch (IOException e){
-		throw new RuntimeException("Falha ao autenticar usuario");
+		throw new RuntimeException("Falha ao autenticar usuario", e);
 }	
 
 }
@@ -55,9 +56,11 @@ try {
 @Override
 protected void successfulAuthentication(HttpServletRequest request,
 										HttpServletResponse response, 
-										FilterChain chain, Authentication authResult) throws IOException, ServletException {
+										FilterChain chain, 
+										Authentication authResult) throws IOException, ServletException {
 	
 	DetalheUsuarioData usuarioData = (DetalheUsuarioData)authResult.getPrincipal();	
+	
 	String token = JWT.create().
 			withSubject(usuarioData.getUsername())
 			.withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRACAO))
@@ -65,15 +68,8 @@ protected void successfulAuthentication(HttpServletRequest request,
 	
 	response.getWriter().write(token); //registrar o token pro corpo da pagina
 	response.getWriter().flush();
-}	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	}	 
+
 	 
 	
 }
