@@ -5,4 +5,4 @@ The credentials are entered in plain text for the endpoint /save, then the api e
 ![salvar](https://github.com/andarino/securityAuthorization/blob/main/eclipse-workspace/cryptpass/img/salvar.png)
 
 
-![serverResponse](https://github.com/andarino/securityAuthorization/blob/main/eclipse-workspace/cryptpass/img/serverR.png)
+![serverResponse](https://github.com/andarino/securityAuthorization/blob/main/eclipse-workspace/cryptpass/img/serveR.png)
