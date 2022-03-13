@@ -4,7 +4,7 @@
 ![spring](https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white)
 
 This project is a password encryption module using Spring security. 
-The credentials are entered in plain text for the endpoint `/save`, then the api encrypts the password before saving it in the database
+The credentials are entered in plain text for the endpoint `/save`, then the API encrypts the password before saving it in the database
 
 ![salvar](https://github.com/andarino/securityAuthorization/blob/main/eclipse-workspace/cryptpass/img/salvar.png)
 
