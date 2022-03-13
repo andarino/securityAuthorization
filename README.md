@@ -9,4 +9,6 @@ The credentials are entered in plain text for the endpoint `/save`, then the API
 ![salvar](https://github.com/andarino/securityAuthorization/blob/main/eclipse-workspace/cryptpass/img/salvar.png)
 
 The way the login was saved in the database can be seen in the response from the server.
+
 ![serverResponse](https://github.com/andarino/securityAuthorization/blob/main/eclipse-workspace/cryptpass/img/serveR.png)
+
